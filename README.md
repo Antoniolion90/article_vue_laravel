@@ -5,5 +5,6 @@
 * `git clone https://github.com/Antoniolion90/article_vue_laravel.git`
 * `php artisan migrate`
 * `php artisan key:generate`
+* `php artisan storage:link`
 * `php artisan db:seed`
 * `php artisan serve`

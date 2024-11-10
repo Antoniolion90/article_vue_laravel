@@ -1,10 +1,9 @@
 <script setup>
 import {ref} from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import {Link} from "@inertiajs/vue3";
 import ToggleDarkMode from "@/Components/Vien/ToggleDarkMode.vue";
 import AppToast from "@/Components/Vien/AppToast.vue";
-import SideBar from "@/Components/Vien/SideBar.vue";
+import NavLink from "@/Components/NavLink.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -19,16 +18,14 @@ const showingNavigationDropdown = ref(false);
                         <div class="hidden xl:flex">
                             <!-- Logo -->
                             <div class="pl-3 shrink-0 flex items-center">
-                                <Link :href="route('article.index')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
-                                </Link>
+                                <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                             </div>
                         </div>
 
                         <div class="hidden xl:flex sm:items-center sm:ms-6">
                             <ToggleDarkMode/>
+                            <NavLink :href="route('main')" class="mx-2">Главная</NavLink>
+                            <NavLink :href="route('article.index')">Статьи</NavLink>
                         </div>
 
                         <!-- Hamburger -->
@@ -68,31 +65,21 @@ const showingNavigationDropdown = ref(false);
                         </div>
                     </div>
                 </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-            block: showingNavigationDropdown,
-            hidden: !showingNavigationDropdown,
-          }"
-                    class="xl:hidden relative"
-                >
-                    <SideBar/>
-                </div>
             </nav>
 
             <AppToast/>
             <!-- Page Content -->
+
             <div class="grid grid-cols-12">
-                <div class="col-span-2 relative hidden xl:block">
-                    <SideBar/>
-                </div>
-                <div class="col-span-12 xl:col-span-10">
-                    <main>
-                        <slot/>
-                    </main>
-                </div>
+
+                <slot/>
+
             </div>
+
+            <footer class="p-16 text-sm text-black dark:text-white/70">
+                <h2 class="text-xl font-semibold text-black dark:text-white">Тредиум</h2>
+                <p>&copy; 2001 - {{ new Date().getFullYear() }} Все права защищены</p>
+            </footer>
         </div>
     </div>
 </template>
